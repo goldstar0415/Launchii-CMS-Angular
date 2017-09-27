@@ -1,0 +1,137 @@
+<!-- /.row -->
+<div class="row mb-2">
+    <div class="col-lg-12">
+        <ng-include src="'/app/common/back.html'"></ng-include>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="icon-settings font-red-sunglo"></i>
+                    <span class="caption-subject bold uppercase"> {{ vm.brand.name }} </span>
+                </div>
+                <div class="actions">
+                    <a ui-sref="dashboard.brand.edit({id:vm.brandId})" class="btn btn-outline btn-circle btn-sm purple">
+                        <i class="fa fa-edit"></i> Edit
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form role="form" class="form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3">Slug</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.brand.slug"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3">Description</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.brand.description"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3"><i class="fa fa-envelope"></i> Email</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.brand.email"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3"><i class="fa fa-facebook-official"></i> Facebook</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.brand.facebook_url"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3"><i class="fa fa-twitter"></i> Twitter</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.brand.twitter_url"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3"><i class="fa fa-instagram"></i> Instagram</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.brand.instagram_url"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<hr>
+<h4>Logo</h4>
+<div id="preview-logo" class="mb-3" ng-if="vm.brand.logo_image">
+    <img ng-src="{{vm.brand.logo_image.standard_url}}" alt="{{vm.brand.logo_image.description}}" style="width: 250px; height: auto;" />
+</div>
+<!--<div class="mt-element-overlay mb-3" ng-if="vm.brand.logo_image">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 image-view-container">
+
+            <div class="mt-overlay-1 mt-scroll-up">
+                <img ng-src="{{vm.brand.logo_image.standard_url}}" alt="{{vm.brand.logo_image.description}}" />
+                <div class="mt-overlay">
+                    <ul class="mt-info">
+                        <li>
+                            <a class="btn default btn-outline" href="javascript:;" data-toggle="tooltip" title="Show Description" ng-click="vm.openEditImageModal($event.currentTarget)">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <image-form form-image="vm.brand.logo_image" insert-img="vm.blankFn" form-mode="View" no-btn="true"></image-form>
+
+        </div>
+    </div>
+</div>-->
+<div ng-if="!vm.brand.logo_image">
+    <h4>No Logo</h4>
+</div>
+
+<hr>
+<h4>Cover</h4>
+<div id="preview-cover" class="mb-3" ng-if="vm.brand.cover_image">
+    <img ng-src="{{vm.brand.cover_image.standard_url}}" alt="{{vm.brand.cover_image.description}}" style="width: 250px; height: auto;" />
+</div>
+<!--<div class="mt-element-overlay mb-3" ng-if="vm.brand.cover_image">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 image-view-container">
+
+            <div class="mt-overlay-1 mt-scroll-up">
+                <img ng-src="{{vm.brand.cover_image.standard_url}}" alt="{{vm.brand.cover_image.description}}" />
+                <div class="mt-overlay">
+                    <ul class="mt-info">
+                        <li>
+                            <a class="btn default btn-outline" href="javascript:;" data-toggle="tooltip" title="Show Description" ng-click="vm.openEditImageModal($event.currentTarget)">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <image-form form-image="vm.brand.cover_image" insert-img="vm.blankFn" form-mode="View" no-btn="true"></image-form>
+
+        </div>
+    </div>
+</div>-->
+<div ng-if="!vm.brand.cover_image">
+    <h4>No Cover</h4>
+</div>

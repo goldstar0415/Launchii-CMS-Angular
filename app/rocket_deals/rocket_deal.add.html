@@ -1,0 +1,158 @@
+<!-- /.row -->
+<div class="row mb-2">
+    <div class="col-lg-12">
+        <ng-include src="'/app/common/back.html'"></ng-include>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="icon-settings font-red-sunglo"></i>
+                    <span class="caption-subject bold uppercase"> {{ vm.mode }} Rocket Deal</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="alert {{vm.response.success}}" id="msg-info" ng-show="vm.response.msg">
+                    <div><strong>{{vm.response.alert}}</strong> {{vm.response.msg}}</div>
+                    <div ng-if="vm.response['error_arr']">
+                        <ul class="pl-5 mt-1">
+                            <li ng-repeat="error in vm.response['error_arr']">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <form role="form" ng-submit="vm.submitAction()" novalidate="novalidate">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label>Vendor</label>
+                            <select class="form-control input-medium" ng-model="vm.form.vendor_id" required>
+                              <option value="{{elem.uid}}" ng-repeat="elem in vm.vendors">{{elem.name}} / {{elem.email}}</option>
+                            </select>
+                        </div>                        
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Select a Deal</label>
+                                    <div ng-if="vm.isDealEmpty">
+                                        <label for="">No existing deal. Add a deal first.</label>
+                                        <a ui-sref="dashboard.deal.add">
+                                            <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Add Deal</button>
+                                        </a>
+                                    </div>
+                                    <select name="" id="" class="form-control" ng-if="!vm.isDealEmpty" ng-model="vm.form.deal_id" ng-init="vm.form.deal_id = vm.default" ng-options="deal.uid as deal.name for deal in vm.deals" required>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="Enter name" ng-model="vm.form.name" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control input-medium" ng-model="vm.form.status" required>
+                              <option value="draft">Draft</option>
+                              <option value="pending">Pending</option>
+                              <option value="approved">Approved</option>
+                              <option value="rejected">Rejected</option>
+                              <option value="published">Published</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Starting date</label>
+                                    <div class="input-icon">
+                                        <i class="fa fa-calendar"></i>
+                                        <input type="text" class="form-control input-medium" id="deal-start-date" ng-change="vm.updateDateDiff()" size="16" ng-model="vm.date_starts" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Time</label>
+                                    <div class="input-icon">
+                                        <i class="fa fa-clock-o"></i>
+                                        <input type="text" class="form-control" id="deal-start-time" ng-model="vm.time_starts" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Ending date</label>
+                                    <div class="input-icon">
+                                        <i class="fa fa-calendar"></i>
+                                        <input type="text" class="form-control input-medium" id="deal-end-date" size="16" ng-change="vm.updateExpireDateDiff()" ng-model="vm.date_ends" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Time</label>
+                                    <div class="input-icon">
+                                        <i class="fa fa-clock-o"></i>
+                                        <input type="text" class="form-control" ng-model="vm.time_ends" id="deal-end-time" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Discount Value</label>
+                            <input type="number" class="form-control input-small" placeholder="Enter Value" ng-model="vm.form.discount_attributes.value" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Discount Code</label>
+                            <textarea rows="3" class="form-control" placeholder="Enter Discount Code" ng-model="vm.form.discount_attributes.codes_txt" required/>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Expire date</label>
+                                    <div class="input-icon">
+                                        <i class="fa fa-calendar"></i>
+                                        <input type="text" class="form-control input-medium" id="discount-expire-date" size="16" ng-model="vm.date_expire" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Time</label>
+                                    <div class="input-icon">
+                                        <i class="fa fa-clock-o"></i>
+                                        <input type="text" class="form-control" ng-model="vm.time_expire" id="discount-expire-time" required />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn btn-default" ladda="!vm.isDone" data-spinner-color="#000000"> Save </button>
+                                <!--<button type="button" ui-sref="{{vm.prevState.name}}" class="btn btn-default">Back</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

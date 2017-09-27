@@ -1,0 +1,117 @@
+<button type="button"
+        class="btn btn-primary add-block-btn"
+        uib-popover-template="'superblocklist.html'"
+        popover-placement="bottom-right"
+        popover-trigger="'outsideClick'"
+        popover-class="super-block-popover"
+        popover-is-open="vm.isSuperBlockPopoverOpen">
+        <i class="fa fa-plus"></i>
+        Add Block
+    </button>
+
+<!-- /.row -->
+<div class="row">
+    <div class="mb-2 pull-left">
+        <a ng-href="{{vm.customerHost}}/deals/{{vm.deal.token}}/preview" target="_blank" class="link-non-underline">
+        	<button type="button" class="btn btn-primary"><i class="fa fa-eye"></i> Preview</button>
+        </a>
+        <a ng-href="{{vm.customerHost}}/deals/{{vm.deal.slug}}" target="_blank" ng-if="vm.deal.is_published == true" class="link-non-underline">
+        	<button type="button" class="btn btn-primary"><i class="fa fa-desktop"></i> Live</button>
+        </a>
+        <a href="javascript:;" ng-click="vm.publishToLive()" class="link-non-underline" ng-if="vm.deal.is_published == true">
+        	<button type="button" class="btn btn-danger"><i class="fa fa-share-square-o"></i> Publish to Live</button>
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="portlet box light" ng-show="vm.response.msg">
+		<div class="alert {{vm.response.success}}" id="msg-info">
+			<strong>{{vm.response.alert}}</strong> {{vm.response.msg}}
+			<div ng-if="vm.response['error_arr']">
+				<ul class="pl-5 mt-1">
+					<li ng-repeat="error in vm.response['error_arr']">{{ error }}</li>
+				</ul>
+			</div>
+		</div>
+    </div>
+</div>
+
+<div id="deal-design-block-list" class="row" dnd-list="vm.dealBlocks" dnd-allowed-types="['superblock']" dnd-drop="vm.dropSuperBlockCallback(index, item, external, type)">
+    <div class="dndPlaceholder">
+        <h5>Drop here to add block.</h5>
+    </div>
+    <div class="portlet box light froala-input-large" ng-repeat="dealBlock in vm.dealBlocks" dnd-type="'dealblock'" ng-attr-id="{{'dealBlock-' + dealBlock.uid}}">
+    	<div class="portlet-body">
+    		<div class="row" ng-if="!dealBlock.is_in_insert">
+    			<div class="tools pull-right">
+    				<a href="javascript:;" ng-click="vm.sortDealBlockByUp(dealBlock)" ng-if="!dealBlock.is_max_up" class="link-tooltip">
+                        <i class="fa fa-chevron-up font-black"></i>
+                        <div class="link-tooltip-arrow"></div>
+                        <span class="link-tooltip-text">Sort Up</span>
+                    </a>
+    				<a href="javascript:;" ng-click="vm.sortDealBlockByDown(dealBlock)" ng-if="!dealBlock.is_max_down" class="link-tooltip">
+                        <i class="fa fa-chevron-down font-black"></i>
+                        <div class="link-tooltip-arrow"></div>
+                        <span class="link-tooltip-text">Sort Down</span>
+                    </a>
+    				<a href="javascript:;" ng-click="vm.resetDealBlock(dealBlock)" class="link-tooltip">
+                        <i class="fa fa-refresh font-black"></i>
+                        <div class="link-tooltip-arrow"></div>
+                        <span class="link-tooltip-text">Reset</span>
+                    </a>
+    				<a href="javascript:;" ng-click="vm.deleteDealBlock(dealBlock, $index)" class="link-tooltip">
+                        <i class="fa fa-close font-black"></i>
+                        <div class="link-tooltip-arrow"></div>
+                        <span class="link-tooltip-text">Remove</span>
+                    </a>
+    			</div>
+    		</div>
+    		<div class="row block-wrapper">
+    			<div>
+    				<textarea class="deal-block-editor" data-block-id="{{dealBlock.uid}}" froala="vm.froalaOptions" ng-disabled="vm.isOperating" ng-model="dealBlock.content"></textarea>
+    			</div>
+    			<div class="action-loading" ng-if="!dealBlock.is_in_insert && vm.isOperating && vm.currentOperation==1 && vm.operatingBlockId==dealBlock.uid">
+    				<h3>Reseting...</h3>
+    			</div>
+    			<div class="action-loading" ng-if="!dealBlock.is_in_insert && vm.isOperating && vm.currentOperation==2 && vm.operatingBlockId==dealBlock.uid">
+    				<h3>Deleting...</h3>
+    			</div>
+                <div class="action-loading" ng-if="dealBlock.is_in_insert">
+    				<h3>Inserting...</h3>
+    			</div>
+                <div class="action-loading" ng-if="!dealBlock.is_in_insert && vm.isOperating && vm.currentOperation==3 && vm.operatingBlockId==dealBlock.uid">
+                    <h3>Sorting Up...</h3>
+                </div>
+                <div class="action-loading" ng-if="!dealBlock.is_in_insert && vm.isOperating && vm.currentOperation==4 && vm.operatingBlockId==dealBlock.uid">
+                    <h3>Sorting Down...</h3>
+                </div>
+
+    		</div>
+    	</div>
+    </div>
+</div>
+
+<div class="row" ng-if="vm.dealBlocks.length == 0">
+    <div class="portlet box light">
+        <div class="portlet-body">
+            <div class="row center">
+                <h3 style="text-align: center;">No blocks for this {{ vm.dealType == 'upsell' ? 'upsell' : 'deal' }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="superblocklist.html">
+    <div class="super-block-container" dnd-list="vm.superBlocks" dnd-allowed-types="[]">
+        <div ng-repeat="block in vm.superBlocks">
+            <div class="block-content" dnd-draggable="block" dnd-type="'superblock'" dnd-dragstart="vm.superBlockDragStart(block)">
+                <div class="content-container">
+                    <h5 ng-bind="block.name"></h5>
+                    <img draggable="false" ng-src="{{ block.image_url }}" alt="{{ block.name }}" />
+                </div>
+            </div>
+            <hr ng-if="!$last"/>
+        </div>
+    </div>
+</script>

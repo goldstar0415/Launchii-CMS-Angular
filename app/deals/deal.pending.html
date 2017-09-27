@@ -1,0 +1,105 @@
+<div ui-view="page_body" class="fade">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-comments"></i>List
+                    </div>
+                    <div class="tools pull-right">
+                        <a href="javascript:;" class="reload-list" ng-click="vm.search()"> </a>
+                    </div>
+                    <div class="col-sm-3 mt-1 pull-right">
+                        <form ng-submit="vm.startSearch()" novalidate="novalidate">
+                            <div class="form-group mb-0">
+                                <div class="input-group search-input">
+                                    <input type="text" class="form-control" ng-model="vm.searchTerm" placeholder="Search {{ vm.filterDealType == 'upsell' ? 'upsell' : 'deal' }}s..." disable-valid-styling="true" />
+                                    <span class="input-group-addon" ng-click="vm.startSearch()">
+                                    <i class="icon-magnifier font-white"></i>
+                                    </span>
+                                    <span class="input-group-addon" ng-click="vm.clearSearch()" ng-if="vm.searchTerm">
+                                    <i class="fa fa-close font-white"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="alert {{vm.response.success}}" ng-if="vm.response.msg">
+                        <strong>{{vm.response.alert}}</strong> {{vm.response.msg}}
+                    </div>
+                    <div class="row table-scrollable">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th> Name </th>
+                                    <th> Status </th>
+                                    <th> Brand </th>
+                                    <th> Link </th>
+                                    <th> Price </th>
+                                    <th> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="deal in vm.deals|itemsPerPage:vm.dealsPerPage" total-items="vm.totalDeals" current-page="vm.currPage" ng-show="!vm.isLoading && vm.deals.length != 0">
+                                    <td ng-bind="deal.name"></td>
+                                    <td ng-bind="deal.status" style="text-transform: capitalize;"></td>
+                                    <td ng-bind="deal.brand.name"></td>
+                                    <td>
+                                        <a href="{{deal.link}}" ng-bind="deal.link" target="_blank"></a>
+                                    </td>
+                                    <td ng-bind="deal.price | toCurrencyFormat"></td>
+                                    <td>
+                                        <a href="javascript:;" ng-click="vm.approveDeal($event.currentTarget, deal)" data-spinner-color="#e7505a" class="btn btn-outline btn-circle btn-sm blue">
+                                            Approve
+                                        </a>
+                                        <a ng-href="{{vm.customerHost}}/deals/{{deal.token}}/preview" target="_blank" class="btn btn-outline btn-circle btn-sm green">
+                                            <i class="fa fa-eye"></i> Preview
+                                        </a>
+                                        <a href="javascript:;" ng-click="vm.openRejectModal($event.currentTarget, deal)" data-spinner-color="#e7505a" class="btn btn-outline btn-circle btn-sm red">
+                                            Reject
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr ng-show="!vm.isLoading && vm.deals.length == 0">
+                                    <td colspan="6">
+                                        <div class="text-center">
+                                            <h3>No pending {{ vm.filterDealType == 'upsell' ? 'upsell' : 'deal' }}s</h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr ng-show="vm.isLoading">
+                                    <td colspan="6">
+                                        <ng-include src="'/app/common/loading.html'"></ng-include>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <reject-deal-modal></reject-deal-modal>
+                    <div class="row">
+                        <div class="col-xs-3" style="padding-top: 10px; padding-bottom: 10px;">
+                            View
+                            <select class="form-control input-xs input-sm input-inline" ng-model="vm.dealsPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                            {{ vm.filterDealType == 'upsell' ? 'upsell' : 'deal' }}s
+                        </div>
+                        <div class="col-xs-8">
+                            <dir-pagination-controls
+                                max-size="8"
+                                direction-links="true"
+                                boundary-links="true"
+                                on-page-change="vm.currPage = newPageNumber; vm.search()" >
+                            </dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

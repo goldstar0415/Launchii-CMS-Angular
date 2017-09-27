@@ -1,0 +1,48 @@
+name:test-block-aurora
+content:test-block-content-aurora
+image:http://www.pngall.com/wp-content/uploads/2016/03/Tree-Free-PNG-Image.png
+status:great
+
+
+
+uid: test-block-111
+name: test-block-aurora
+content: test block content
+image_url: http://www.pngall.com/wp-content/uploads/2016/03/Tree-Free-PNG-Image.png
+status: ok
+is_active: true
+is_archived: true
+created_at: 2017-07-11T23:58:14.584Z
+updated_at: 2017-07-11T23:58:14.584Z
+
+
+var body = {
+                "name":"test-block-aurora",
+                "content":"test-block-content-aurora",
+                "image":"http://www.pngall.com/wp-content/uploads/2016/03/Tree-Free-PNG-Image.png",
+                "status":"great"
+            };
+            var header = {
+                "accept":"application/json, text/plain, */*",
+                "accept-encoding":"gzip, deflate, br",
+                "accept-language":"en-US,en;q=0.8",
+                "access-token":"uK8i9wfmpm800ipnSMN0hg",
+                "cache-control":"max-age=0",
+                "client":"B2PwH5QEEWb4fnFV8poBBw",
+                "expiry":"1501029864",
+                "if-modified-since":"Mon, 26 Jul 1997 05:00:00 GMT",
+                "origin":"http://localhost:8080",
+                "referer":"http://localhost:8080/",
+                "token-type":"Bearer",
+                "uid":"green.tree0820@yandex.com",
+                "user-agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Mobile Safari/537.36"
+            }
+            $http.post(url, body, {headers: header});
+
+            var body = {
+                "name":"test-block-elsa",
+                "content":"test-block-content-elsa",
+                "image":"http://www.pngall.com/wp-content/uploads/2016/03/Tree-PNG.png",
+                "status":"great"
+            };
+            $http.post(url, body, {headers: header});

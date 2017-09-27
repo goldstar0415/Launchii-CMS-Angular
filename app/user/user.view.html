@@ -1,0 +1,75 @@
+<!-- /.row -->
+<div class="row mb-2">
+    <div class="col-lg-12">
+        <ng-include src="'/app/common/back.html'"></ng-include>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="icon-settings font-red-sunglo"></i>
+                    <span class="caption-subject bold uppercase"> {{ vm.user.name }} </span>
+                </div>
+                <div class="actions">
+                    <a href="javascript:;" ng-click="vm.sendConfirmationEmail($event.currentTarget)" data-spinner-color="#e7505a" ng-if="!(vm.user.is_confirmed)" class="btn btn-outline btn-circle btn-sm green">
+                        <i class="fa fa-envelope"></i> Send Confirmation Email
+                    </a>
+                    <a ui-sref="dashboard.user.edit({id:vm.userId})" ng-if="!(vm.user | isSuperAdmin)" class="btn btn-outline btn-circle btn-sm purple">
+                        <i class="fa fa-edit"></i> Edit
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="alert {{vm.response.success}}" id="msg-info" ng-show="vm.response.msg">
+                    <div><strong>{{vm.response.alert}}</strong> {{vm.response.msg}}</div>
+                    <div ng-if="vm.response['error_arr']">
+                        <ul class="pl-5 mt-1">
+                            <li ng-repeat="error in vm.response['error_arr']">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <form role="form" class="form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3">Email</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.user.email"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3">Confirmed</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.user.is_confirmed | isYesNo"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3">Role</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.user.role | ucFirst"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3">Active</label>
+                            <div class="col-md-9">
+                                <p ng-bind="vm.user.is_active | isYesNo"></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

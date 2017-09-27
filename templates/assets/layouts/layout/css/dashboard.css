@@ -1,0 +1,31 @@
+.widget-thumb .widget-thumb-body .widget-thumb-body-stat-no-unit {
+    height: 60px;
+    display: inline-flex !important;
+    align-items: center;
+}
+
+.widget-thumb .widget-thumb-body .widget-thumb-body-stat-time-unit {
+    font-size: 16px !important;
+}
+
+.dashboard-col {
+    width: 100% !important;
+}
+
+/* for large screens */
+@media (min-width: 1200px) {
+    .dashboard-col {
+        width: 20% !important;
+    }
+}
+
+.portlet.box>.portlet-title>.tools>a.reload-list{
+    background-image: url(../../../global/img/portlet-reload-icon-white.png);
+    width: 13px;
+}
+
+.dashboard-date-range p {
+    font-size: 16px;
+    padding-left: 15px;
+    padding-right: 15px;
+}

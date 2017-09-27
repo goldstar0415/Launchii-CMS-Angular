@@ -1,0 +1,23 @@
+<div class="form-group video-field-container">
+    <div class="video-preview"></div>
+
+    <div class="input-group">
+    	Description:<input type="text" class="form-control" ng-model="formVideo.description" disabled />
+    </div>
+    <div class="image-preview"></div>
+    <div class="input-group">
+        <input type="text" class="form-control" ng-model="formVideo.image_attributes.file.filename" disabled />
+        <input type="text" class="form-control" ng-model="formVideo.image_attributes.description" disabled />
+    </div>
+
+    <div class="input-group">
+    	Type:<input type="text" class="form-control" ng-model="formVideo.source_type" disabled />
+    </div>
+
+    <div class="input-group">
+        <input type="text" class="form-control" ng-model="formVideo.title" disabled />
+        <span class="input-group-addon" style="cursor: pointer" data-original-title="Remove" data-toggle="tooltip" title="Remove" ng-click="remove($event.currentTarget, formVideo)">
+            <i class="fa fa-close font-red" ></i>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<!-- /.row -->
+<div class="row mb-2">
+    <div class="col-lg-12">
+        <ng-include src="'/app/common/back.html'"></ng-include>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="icon-settings font-red-sunglo"></i>
+                    <span class="caption-subject bold uppercase"> {{ vm.mode }} Super Block </span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="alert {{vm.response.success}}" id="msg-info" ng-show="vm.response.msg">
+                    <div><strong>{{vm.response.alert}}</strong> {{vm.response.msg}}</div>
+                    <div ng-if="vm.response['error_arr']">
+                        <ul class="pl-5 mt-1">
+                            <li ng-repeat="error in vm.response['error_arr']">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <form role="form" ng-submit="vm.submitAction()" novalidate="novalidate">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="Enter name" ng-model="vm.form.name" required />
+                        </div>
+                        <!--Super Block Image-->
+                        <hr />
+                        <div class="form-group">
+                            <div id="preview-image" class="preview-image mb-5">
+                                <h4 ng-if="vm.mode == 'Add'" class="text-center no-image no-image-border">No image</h4>                                
+                                <label ng-if="vm.mode == 'Edit'">Image Preview:</label>
+                                <div ng-if="vm.mode == 'Edit'">
+                                  <img ng-src="{{vm.form.image_url}}" ng-if="vm.mode == 'Edit'" style="width: 250px; height: auto;border: 1px solid #f0f0f0;" />
+                                </div>
+                                <h5 class="text-center">Recommended size 200x130 pixels</h5>
+                            </div>
+                            <hr />
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <label for="">Image</label>
+                                <div class="input-group input-large">
+                                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                        <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                        <span class="fileinput-filename"> </span>
+                                    </div>
+                                    <span class="input-group-addon btn default btn-file">
+                                      <span class="fileinput-new"> Select file </span>
+                                      <span class="fileinput-exists"> Change </span>
+                                      <input type="file" id="image-file-input" base-sixty-four-input ng-model="vm.form.image_file" accept="image/*" maxsize="10000" ng-change="vm.previewImage()" required ng-if="vm.mode == 'Add'">
+                                      <input type="file" id="image-file-input" base-sixty-four-input ng-model="vm.form.image_file" accept="image/*" maxsize="10000" ng-change="vm.previewImage()" ng-if="vm.mode == 'Edit'">
+                                    </span>
+                                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput" ng-click="vm.clearImage()">  Remove
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--Content-->
+                        <hr/>
+                        <div class="form-group">
+                            <label>Content</label>
+                            <div class="froala-input-large" style="margin: 0;">
+                                <textarea froala="vm.froalaOptions" ng-model="vm.form.content"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn btn-default" ladda="!vm.isDone" data-spinner-color="#000000">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

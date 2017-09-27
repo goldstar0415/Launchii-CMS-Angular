@@ -1,0 +1,256 @@
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- /.main_body -->
+                <div ui-view="main_body" class="fade">
+                    <div class="row dashboard-date-range">
+                        <p align="right"><strong>{{vm.dateRangeString}}</strong></p>
+                    </div>
+                    <!-- BEGIN SUMMARY ERROR MESSAGE -->
+                    <div class="alert alert-danger" ng-if="vm.summaryError">
+                        <strong>There was an error: </strong> {{vm.summaryError}}
+                    </div>
+                    <!-- END SUMMARY ERROR MESSAGE -->
+                    <!-- BEGIN DASHBOARD SUMMARY -->
+                    <div class="row" ng-if="vm.summaryLoaded">
+                        <div class="col-lg-2 dashboard-col">
+                            <div class="dashboard-stat dashboard-stat-v2 blue">
+                                <div class="visual">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <div class="details">
+                                    <div class="number">
+                                        <span> {{vm.registeredUserCount}} </span>
+                                    </div>
+                                    <div class="desc"> Registered Customers </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 dashboard-col">
+                            <div class="dashboard-stat dashboard-stat-v2 red">
+                                <div class="visual">
+                                    <i class="fa fa-building"></i>
+                                </div>
+                                <div class="details">
+                                    <div class="number">
+                                        <span> {{vm.registeredVendorCount}} </div>
+                                    <div class="desc"> Registered Vendors </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 dashboard-col">
+                            <div class="dashboard-stat dashboard-stat-v2 green">
+                                <div class="visual">
+                                    <i class="fa fa-credit-card"></i>
+                                </div>
+                                <div class="details">
+                                    <div class="number">
+                                        <span> {{vm.claimedCouponCount}} </span>
+                                    </div>
+                                    <div class="desc"> Claimed Coupons </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 dashboard-col">
+                            <div class="dashboard-stat dashboard-stat-v2 purple">
+                                <div class="visual">
+                                    <i class="fa fa-money"></i>
+                                </div>
+                                <div class="details">
+                                    <div class="number">
+                                        <span> ${{vm.couponClaimedValue}} </span>
+                                    </div>
+                                    <div class="desc"> Claimed Coupon Value </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 dashboard-col">
+                            <div class="dashboard-stat dashboard-stat-v2 red-haze">
+                                <div class="visual">
+                                    <i class="fa fa-calendar-check-o"></i>
+                                </div>
+                                <div class="details">
+                                    <div class="number">
+                                        <span> {{vm.runningDealCount}} </span>
+                                    </div>
+                                    <div class="desc"> Running Deals </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END DASHBOARD SUMMARY -->
+                    <!-- BEGIN GA DASHBOARD ERROR -->
+                    <div class="alert alert-danger" ng-if="vm.analyticsError">
+                        <strong>Google Analytics error: </strong> {{vm.analyticsError}}
+                    </div>
+                    <div class="alert alert-success" ng-if="!vm.analyticsError && vm.firstLoadingFinished && !vm.basicReport && !vm.trafficReport && !vm.trafficDeviceReport">
+                        No GA data available.
+                    </div>
+                    <!-- END GA DASHBOARD ERROR -->
+                    <!-- BEGIN BASIC REPORT METRIC BOXES -->
+                    <div class="row widget-row" ng-if="!vm.analyticsError && vm.basicReport">
+                        <div class="col-lg-2">
+                            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                                <h4 class="widget-thumb-heading">Users</h4>
+                                <div class="widget-thumb-wrap">
+                                    <i class="widget-thumb-icon bg-green icon-users"></i>
+                                    <div class="widget-thumb-body">
+                                        <span class="widget-thumb-body-stat widget-thumb-body-stat-no-unit">{{vm.basicReport.data.totals[0].values[0]}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                                <h4 class="widget-thumb-heading">Sessions</h4>
+                                <div class="widget-thumb-wrap">
+                                    <i class="widget-thumb-icon bg-red icon-loop"></i>
+                                    <div class="widget-thumb-body">
+                                        <span class="widget-thumb-body-stat widget-thumb-body-stat-no-unit">{{vm.basicReport.data.totals[0].values[1]}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                                <h4 class="widget-thumb-heading">AVG Time on Site</h4>
+                                <div class="widget-thumb-wrap">
+                                    <i class="widget-thumb-icon bg-purple icon-speedometer"></i>
+                                    <div class="widget-thumb-body">
+                                        <span class="widget-thumb-body-stat widget-thumb-body-stat-no-unit widget-thumb-body-stat-time-unit">{{vm.basicReport.data.totals[0].values[2] | secondsTohhmmss}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                                <h4 class="widget-thumb-heading">Deal Views</h4>
+                                <div class="widget-thumb-wrap">
+                                    <i class="widget-thumb-icon bg-purple icon-eye"></i>
+                                    <div class="widget-thumb-body">
+                                        <span class="widget-thumb-body-stat widget-thumb-body-stat-no-unit">{{vm.basicReport.data.totals[0].values[3]}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                                <h4 class="widget-thumb-heading">Coupons Selected</h4>
+                                <div class="widget-thumb-wrap">
+                                    <i class="widget-thumb-icon bg-blue icon-magic-wand"></i>
+                                    <div class="widget-thumb-body">
+                                        <span class="widget-thumb-body-stat widget-thumb-body-stat-no-unit">{{vm.basicReport.data.totals[0].values[4]}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                                <h4 class="widget-thumb-heading">Shop Now - Clicks</h4>
+                                <div class="widget-thumb-wrap">
+                                    <i class="widget-thumb-icon bg-red-pink icon-graduation"></i>
+                                    <div class="widget-thumb-body">
+                                        <span class="widget-thumb-body-stat widget-thumb-body-stat-no-unit">{{vm.basicReport.data.totals[0].values[5]}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END BASIC REPORT METRIC BOXES -->
+                    <!-- BEGIN BASIC REPORT CHARTS -->
+                    <div class="row widget-row" ng-show="!vm.analyticsError && (vm.basicReport || vm.trafficReport)">
+                        <div class="col-xs-12 col-lg-6" ng-show="!vm.analyticsError && vm.basicReport">
+                            <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption ">
+                                        <span class="caption-subject font-dark bold uppercase">Sessions vs Shop - Now Clicks</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div id="basic-report-chart" class="CSSAnimationChart"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6" ng-show="!vm.analyticsError && vm.trafficReport">
+                            <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption ">
+                                        <span class="caption-subject font-dark bold uppercase">Page view traffic for all Deals</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div id="traffic-report-chart" class="CSSAnimationChart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END BASIC REPORT CHARTS -->
+                    <!-- BEGIN TRAFFIC PER DEVICE TABLE -->
+                    <div class="row widget-row" ng-if="!vm.analyticsError && vm.trafficDeviceReport">
+                        <div class="col-xs-12">
+                            <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption ">
+                                        <span class="caption-subject font-dark bold uppercase">Traffic per device category</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <table style="width:100%;border-collapse:collapse;" class="table table-striped table-hover dashboard-table">
+                                        <thead style="background-color:#E8E8E8;">
+                                            <tr>
+                                                <td style="height:28px;">Device</td>
+                                                <td>Sessions</td>
+                                                <td>Users</td>
+                                                <td>Bounce Rate</td>
+                                                <td>AVG Session</td>
+                                                <td>Accept Offer</td>
+                                                <td>Shop Now - Clicks</td>
+                                                <td>New Accounts</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="row in vm.trafficDeviceReport.data.rows">
+                                                <td style="height:28px;">{{row.dimensions[0]}}</td>
+                                                <td>{{row.metrics[0].values[0]}}</td>
+                                                <td>{{row.metrics[0].values[1]}}</td>
+                                                <td>{{row.metrics[0].values[2] | number : 2}}%</td>
+                                                <td>{{row.metrics[0].values[3] | secondsTohhmmss}}</td>
+                                                <td>{{row.metrics[0].values[4]}}</td>
+                                                <td>{{row.metrics[0].values[5]}}</td>
+                                                <td>{{row.metrics[0].values[6]}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END TRAFFIC PER DEVICE TABLE -->
+                    <!-- BEGIN TRAFFIC PER DEVICE CHART -->
+                    <div class="row widget-row" ng-show="!vm.analyticsError && vm.trafficDeviceReport">
+                        <div class="col-xs-12" ng-show="!vm.analyticsError && vm.trafficDeviceReport">
+                            <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption ">
+                                        <span class="caption-subject font-dark bold uppercase">Sessions per device category</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div id="traffic-device-report-chart" class="CSSAnimationChart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END TRAFFIC PER DEVICE CHART -->
+                </div>
+                <!-- /.main_body -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->

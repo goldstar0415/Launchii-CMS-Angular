@@ -1,0 +1,19 @@
+<!-- BEGIN FORGOT PASSWORD FORM -->
+<form class="forget-form" name="forgotForm" novalidate="novalidate" ng-submit="vm.forgotPassword()" style="display:block;">
+    <h3 class="font-green">Forget Password ?</h3>
+    <p> Enter your e-mail address below to reset your password. </p>
+    <div class="form-group">
+        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" ng-model="vm.form.email" required autofocus />
+    </div>
+    <div class="alert alert-danger" ng-if="$root.resetPasswordError">
+        <strong>Error!</strong> <br/> {{ $root.resetPasswordError }}
+    </div>
+    <div class="alert alert-success" ng-if="$root.resetPasswordSuccess">
+        <strong>Success!</strong><br/> {{ $root.resetPasswordSuccess }}
+    </div>
+    <div class="form-actions">
+        <button type="button" ng-click="vm.toLogin();" class="btn green btn-outline">Back</button>
+        <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+    </div>
+</form>
+<!-- END FORGOT PASSWORD FORM -->

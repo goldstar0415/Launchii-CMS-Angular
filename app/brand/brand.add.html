@@ -1,0 +1,157 @@
+<!-- /.row -->
+<div class="row mb-2">
+    <div class="col-lg-12">
+        <ng-include src="'/app/common/back.html'"></ng-include>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-red-sunglo">
+                    <i class="icon-settings font-red-sunglo"></i>
+                    <span class="caption-subject bold uppercase"> {{ vm.mode }} Brand</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="alert {{vm.response.success}}" id="msg-info" ng-show="vm.response.msg">
+                    <div><strong>{{vm.response.alert}}</strong> {{vm.response.msg}}</div>
+                    <div ng-if="vm.response['error_arr']">
+                        <ul class="pl-5 mt-1">
+                            <li ng-repeat="error in vm.response['error_arr']">{{ error }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <form role="form" ng-submit="vm.submitAction()" novalidate="novalidate">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label>Vendor</label>
+                            <select class="form-control input-medium" ng-model="vm.form.vendor_id" required>
+                              <option value="{{elem.uid}}" ng-repeat="elem in vm.vendors">{{elem.name}} / {{elem.email}}</option>
+                            </select>
+                        </div>                        
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="Enter name" ng-model="vm.form.name" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" rows="5" ng-model="vm.form.description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <div class="input-icon">
+                                <i class="fa fa-envelope"></i>
+                                <input type="email" class="form-control" placeholder="Enter email" ng-model="vm.form.email" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control input-medium" ng-model="vm.form.status" required>
+                              <option value="draft">Draft</option>
+                              <option value="published">Published</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Facebook Url</label>
+                            <div class="input-icon">
+                                <i class="fa fa-facebook-square"></i>
+                                <input type="url" class="form-control" placeholder="Enter Facebook url" ng-model="vm.form.facebook" validate-facebook-url="vm.form.facebook" required />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Twitter Url</label>
+                            <div class="input-icon">
+                                <i class="fa fa-twitter"></i>
+                                <input type="url" class="form-control" placeholder="Enter Twitter url" ng-model="vm.form.twitter" validate-twitter-url="vm.form.twitter" required />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Instagram Url</label>
+                            <div class="input-icon">
+                                <i class="fa fa-instagram"></i>
+                                <input type="url" class="form-control" placeholder="Enter Instagram url" ng-model="vm.form.instagram" validate-instagram-url="vm.form.instagram" required />
+                            </div>
+                        </div>
+                        <!--Brand Logo-->
+                        <hr />
+                        <div class="form-group">
+                            <div id="preview-logo" class="mb-5">
+                                <h4 ng-if="vm.mode == 'Add'" class="text-center no-image no-image-border">no image</h4>
+                                <label ng-if="vm.mode == 'Edit'">Logo Preview:</label>
+                                <div ng-if="vm.mode == 'Edit'">
+                                  <img ng-src="{{vm.form.logo_image.standard_url}}" ng-if="vm.mode == 'Edit'" style="width: 250px; height: auto;border: 1px solid #f0f0f0;" />
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <label for="">Logo</label>
+                                <div class="input-group input-large">
+                                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                        <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                        <span class="fileinput-filename"> </span>
+                                    </div>
+                                    <span class="input-group-addon btn default btn-file">
+                                      <span class="fileinput-new"> Select file </span>
+                                      <span class="fileinput-exists"> Change </span>
+                                      <input type="file" id="image-file-input" base-sixty-four-input ng-model="vm.form.logo" accept="image/*" maxsize="10000" ng-change="vm.previewImage(vm.form.logo,'#preview-logo','Logo')" required ng-if="vm.mode == 'Add'">
+                                      <input type="file" id="image-file-input" base-sixty-four-input ng-model="vm.form.logo" accept="image/*" maxsize="10000" ng-change="vm.previewImage(vm.form.logo,'#preview-logo','Logo')" ng-if="vm.mode == 'Edit'">
+                                    </span>
+                                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput" ng-click="vm.clearLogoImage(vm.form.logo, '#preview-logo')"> Remove </a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Brand Cover-->
+                        <hr />
+                        <div class="form-group">
+                            <div id="preview-cover" class="mb-5">
+                                <h4 ng-if="vm.mode == 'Add'" class="text-center no-image no-image-border">no image</h4>
+                                <label ng-if="vm.mode == 'Edit'">Cover Image Preview:</label>
+                                <div>
+                                  <img ng-src="{{vm.form.cover_image.standard_url}}" ng-if="vm.mode == 'Edit'" style="width: 250px; height: auto;border: 1px solid #f0f0f0;" />
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <label for="">Cover Image</label>
+                                <div class="input-group input-large">
+                                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                        <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                        <span class="fileinput-filename"> </span>
+                                    </div>
+                                    <span class="input-group-addon btn default btn-file">
+                                      <span class="fileinput-new"> Select file </span>
+                                      <span class="fileinput-exists"> Change </span>
+                                      <input type="file" id="image-file-input" base-sixty-four-input ng-model="vm.form.cover" accept="image/*" maxsize="10000" ng-change="vm.previewImage(vm.form.cover, '#preview-cover','Cover Image')" required ng-if="vm.mode == 'Add'">
+                                      <input type="file" id="image-file-input" base-sixty-four-input ng-model="vm.form.cover" accept="image/*" maxsize="10000" ng-change="vm.previewImage(vm.form.cover, '#preview-cover','Cover Image')" ng-if="vm.mode == 'Edit'">
+                                    </span>
+                                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput" ng-click="vm.clearCoverImage(vm.form.cover, '#preview-cover')"> Remove </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn btn-default" ladda="!vm.isDone" data-spinner-color="#000000">Save</button>
+                                <!--<button type="button" ui-sref="{{vm.prevState.name}}" class="btn btn-default">Back</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

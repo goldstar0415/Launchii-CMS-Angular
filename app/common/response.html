@@ -1,0 +1,8 @@
+<div class="alert {{vm.response.success}}" id="msg-info" ng-show="vm.response.msg">
+    <div><strong>{{vm.response.alert}}</strong> {{vm.response.msg}}</div>
+    <div ng-if="vm.response['error_arr']">
+        <ul class="pl-5 mt-1">
+            <li ng-repeat="error in vm.response['error_arr']">{{ error }}</li>
+        </ul>
+    </div>
+</div>

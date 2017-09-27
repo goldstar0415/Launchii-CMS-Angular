@@ -1,0 +1,259 @@
+/* here you can put your own css to customize and override the theme */
+
+.search-input input,
+.search-input input:focus {
+    background: transparent;
+    border: 0px;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+}
+
+.search-input input::-webkit-input-placeholder {
+    color: #fff !important;
+}
+
+.search-input input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #fff !important;
+}
+
+.search-input input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #fff !important;
+}
+
+.search-input input:-ms-input-placeholder {
+    color: #fff !important;
+}
+
+.search-input .input-group-addon {
+    background: transparent;
+    border: 0px;
+    color: #fff;
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+}
+
+#preview-logo,
+#preview-cover,
+.preview-image {
+    height: 258px;
+    width: 258px;
+}
+
+#preview-logo img,
+#preview-cover img,
+.preview-image img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.no-image {
+    font-weight: bold;
+    color: #999;
+    padding-top: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.no-image-border {
+    border: 1px solid #f0f0f0;
+}
+
+.discount-box {
+  height: 100px;
+}
+
+.discount-attr-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discount-attr-box.discount-attr-value-box {
+  margin-top: 5px;
+}
+
+.discount-attr-value {
+  height: 57px;
+  font-size: 40px;
+  font-family: sans-serif;
+}
+
+.discount-attr-name {
+  height: 21px;
+  font-size: 15px;
+  font-family: sans-serif;
+}
+
+#deal-form .help-block{
+  display: initial;
+}
+
+#deal-form span.error{
+  color: #e73d4a;
+}
+
+.froala-input-large{
+  max-width: 960px;
+  padding: 5px;
+  margin: auto;
+}
+
+.froala-input-large .block-wrapper{
+  position: relative;
+}
+
+.froala-input-large .block-wrapper .action-loading{
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+}
+
+.froala-input-large .block-wrapper .action-loading h3{
+  top: calc(50% - 15px);
+  margin: 0;
+  position: relative;
+}
+
+#block-modal h6{
+  margin: 5px 0;
+  text-align: center
+}
+
+a.link-non-underline:hover,
+a.link-non-underline:focus{
+  text-decoration: none;
+}
+
+.popover.super-block-popover {
+    max-width: 280px;
+    width: 280px;
+    position: fixed;
+    top: 140px !important;
+}
+
+.super-block-popover .super-block-container {
+    max-height: 300px;
+    overflow-y : scroll;
+}
+
+.super-block-popover .super-block-container .block-content {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px !important;
+    background-color: rgba(50, 197, 210, 0.3);
+    border: 1px solid #32c5d2;
+}
+
+.super-block-popover .super-block-container .content-container {
+    align-items: center;
+    text-align: center;
+}
+
+.super-block-popover .super-block-container .content-container img {
+    width: 160px;
+    height: 104px;
+}
+
+.super-block-popover .super-block-container .content-container h5 {
+    white-space:;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.super-block-popover .super-block-container hr {
+    margin: 5px 0 !important;
+}
+
+.link-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.link-tooltip .link-tooltip-text {
+    visibility: hidden;
+    width: 100px;
+    background-color: white;
+    color: #555;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,.2);
+    padding: 3px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 130%;
+    left: 50%;
+    margin-left: -75px;
+    box-shadow: 3px 3px rgba(102,102,102,.1);
+}
+
+.link-tooltip .link-tooltip-arrow{
+    visibility: hidden;
+    left: 50%;
+    margin-left: -10px;
+    border-bottom-width: 0;
+    border-top-color: #999;
+    border-top-color: rgba(0,0,0,.25);
+    bottom: 11px;
+    border-width: 9px;
+
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: #999 transparent transparent transparent;
+    border-style: solid;
+}
+
+.link-tooltip .link-tooltip-arrow::after{
+    visibility: hidden;
+    content: " ";
+    bottom: -9px;
+    margin-left: -10px;
+    border-bottom-width: 0;
+    border-top-color: #fff;
+    border-width: 10px;
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: #fff transparent transparent transparent;
+    border-style: solid;
+    z-index: 100;
+}
+
+.link-tooltip:hover .link-tooltip-text,
+.link-tooltip:hover .link-tooltip-arrow,
+.link-tooltip:hover .link-tooltip-arrow::after {
+    visibility: visible;
+}
+
+#deal-design-block-list {
+    min-height: 40px;
+}
+
+#deal-design-block-list .dndPlaceholder {
+    max-width: 960px;
+    margin: auto;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #32c5d2;
+    background-color: rgba(50, 197, 210, 0.3);
+}
+
+#deal-design-block-list .dndPlaceholder h5 {
+    text-align: center;
+}
+
+.add-block-btn {
+    position: fixed;
+    right: 20px;
+    top: 104px;
+    z-index: 10000;
+}

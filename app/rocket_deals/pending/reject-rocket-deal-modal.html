@@ -1,0 +1,22 @@
+<div id="reject-rocket-deal-modal" class="modal fade in" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Reject Rocket Deal</h4>
+            </div>
+            <div class="modal-body">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label for="name">Reject Reason</label>
+                            <textarea name="" id="reject-reason" cols="30" rows="3" class="form-control" ng-model="reject_reason" required></textarea>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline">Close</button>
+                <button type="button" class="btn red" ng-click="rejectRocketDeal()">Reject</button>
+            </div>
+        </div>
+    </div>
+</div>

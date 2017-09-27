@@ -1,0 +1,11 @@
+<!-- BEGIN PAGE BAR -->
+<div class="page-bar" style="margin-bottom: 10px;">
+    <ul class="page-breadcrumb">
+        <li ng-repeat="crumb in $root.crumbs track by $index">
+            <a ng-if="!$last" ui-sref="{{crumb.state}}">{{ crumb.name }}</a>
+            <span ng-if="$last">{{ crumb.name }}</span>
+            <i class="fa fa-circle" ng-if="!$last"></i>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE BAR -->

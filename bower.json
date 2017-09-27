@@ -1,0 +1,21 @@
+{
+  "name": "launchii-admin",
+  "description": "Angular app for Launchii Admin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/launchii/angular-admin"
+  },
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
